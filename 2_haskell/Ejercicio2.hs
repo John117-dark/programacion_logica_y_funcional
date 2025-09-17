@@ -79,10 +79,10 @@ menu = do
             n3 <- getLine
             putStrLn "Cantidad de monedas de $50: "
             n4 <- getLine
-            let a = read n1 :: Integer
-            let b = read n2 :: Integer
-            let c = read n3 :: Integer
-            let d = read n4 :: Integer
+            let a = read n1 :: Double
+            let b = read n2 :: Double
+            let c = read n3 :: Double
+            let d = read n4 :: Double
             let resultado = sumarMonedas a b c d
             putStrLn $ "Total: $" ++ show resultado
             menu
