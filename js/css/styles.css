@@ -83,3 +83,11 @@ header > nav > a{
     animation-timing-function: infinite;
     animation-direction: alternate;
 }
+@keyframes opacidad {
+    from{
+        opacity: 0.2;
+    }
+    to{
+        opacity: 1;
+    }
+}
