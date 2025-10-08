@@ -1,0 +1,70 @@
+:root{
+    --bg: #1daefc;
+    --texto: #ededed;
+    --fondo: yellow;
+}
+*{
+    margin: 0;
+    padding: 0px;
+}
+body{
+    background-color: var(--bg);
+    font-family: 'Simpsonfont', sans-serif;
+    font-family: 'Akbar', sans-serif;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 50px;
+}
+header > .logo >img{
+    width: 100px;
+}
+header > nav > a{
+    margin: 0 15px;
+    color: var(--texto);
+    text-decoration: none;
+    font-weight: bold;
+}
+.search{
+    background-color: var(--fondo);
+    border-radius: 30px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.search > input{
+    outline-color: transparent;
+    background-color: transparent;
+    border: none;
+    color: black;
+    outline: none;
+
+}
+#lista{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+#lista li{
+    list-style: none;
+    background-color: white;
+    color: #1d1d1d;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 10px #1d1d1d;
+    transition: all 0.3s ease-in-out;
+}
+#lista > li:hover{
+    box-shadow: 5px 4px 20px var(--fondo);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+#lista > li > h2{
+    width: 100%;
+    font-size: 1rem;
+    color: #1d1d1d;
+}
