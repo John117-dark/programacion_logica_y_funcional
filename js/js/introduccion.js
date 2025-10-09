@@ -68,14 +68,17 @@ document.querySelector("#linkEdad").addEventListener('click',(evt)=>{
 //Moridos
 document.querySelector("#moridos").addEventListener('click',(evt)=>{
     evt.preventDefault()
-    let res = arr_original.filter((item)=>item.personaje.status == 'deceased')
-    imprimir(arr_original)
+    let res = arr_original.filter((item)=>item.personaje.status == 'Deceased')
+    console.log(res)
+    imprimir(res)
 })
 //Menores de edad
-document.querySelector("#menoresEdad").addEventListener('click',(evt)=>{
+document.querySelector("#menores").addEventListener('click',(evt)=>{
     //Evitar recarga
     evt.preventDefault()
-    let res = arr_original.filter((item)=>item.personaje.age < 18)
+    let res = arr_original.filter(item =>
+        item.personaje && item.personaje.age != null && item.personaje.age < 18
+    );    
     imprimir(res)
 })
 //Promedio de edad
@@ -87,8 +90,13 @@ document.querySelector("#menoresEdad").addEventListener('click',(evt)=>{
 //Mostrar los que son estudiantes
 document.querySelector("#students").addEventListener('click',(evt)=>{
     evt.preventDefault()
-    let res = arr_original.filter((item)=>item.personaje.occupation == 'Student at Springfield Elementary School')
-    imprimir(arr_original)
+    let res = arr_original.filter(item =>
+        item.personaje &&
+        typeof item.personaje.occupation === 'string' &&
+        item.personaje.occupation.toLowerCase().includes('student')
+    );
+    console.log(res)    
+    imprimir(res)
 })
 //Fechas de nacimiento < 1980/02/01
 
