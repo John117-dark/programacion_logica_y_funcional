@@ -82,11 +82,37 @@ document.querySelector("#menores").addEventListener('click',(evt)=>{
     imprimir(res)
 })
 //Promedio de edad
+document.querySelector("#promedio").addEventListener('click', (evt) => {
+    evt.preventDefault();
+    let edades = arr_original
+        .filter(item => item.personaje && typeof item.personaje.age === "number")
+        .map(item => item.personaje.age);
 
+    let promedio = edades.reduce((acc, val) => acc + val, 0) / edades.length;
+
+    alert(`El promedio de edad es: ${promedio.toFixed(2)}`);
+});
 //Ordenar por edad
+document.querySelector("#ordenEdad").addEventListener('click', (evt) => {
+    evt.preventDefault();
+    let res = arr_original
+        .filter(item => item.personaje && typeof item.personaje.age === "number")
+        .sort((a, b) => a.personaje.age - b.personaje.age);
 
+    imprimir(res);
+});
 //Mostrar el mas viejo y el mas joven
+document.querySelector("#extremosEdad").addEventListener('click', (evt) => {
+    evt.preventDefault();
+    let filtrados = arr_original.filter(item => item.personaje && typeof item.personaje.age === "number");
 
+    let ordenados = [...filtrados].sort((a, b) => a.personaje.age - b.personaje.age);
+
+    let joven = ordenados[0];
+    let viejo = ordenados[ordenados.length - 1];
+
+    imprimir([joven, viejo]);
+});
 //Mostrar los que son estudiantes
 document.querySelector("#students").addEventListener('click',(evt)=>{
     evt.preventDefault()
