@@ -102,7 +102,7 @@ document.querySelector("#ordenEdad").addEventListener('click', (evt) => {
     imprimir(res);
 });
 //Mostrar el mas viejo y el mas joven
-document.querySelector("#extremosEdad").addEventListener('click', (evt) => {
+document.querySelector("#viejo_joven").addEventListener('click', (evt) => {
     evt.preventDefault();
     let filtrados = arr_original.filter(item => item.personaje && typeof item.personaje.age === "number");
 
@@ -113,17 +113,64 @@ document.querySelector("#extremosEdad").addEventListener('click', (evt) => {
 
     imprimir([joven, viejo]);
 });
+
 //Mostrar los que son estudiantes
-document.querySelector("#students").addEventListener('click',(evt)=>{
+document.querySelector("#students").addEventListener('click', (evt) => {
     evt.preventDefault()
     let res = arr_original.filter(item =>
         item.personaje &&
         typeof item.personaje.occupation === 'string' &&
         item.personaje.occupation.toLowerCase().includes('student')
     );
-    console.log(res)    
+    console.log(res)
     imprimir(res)
 })
+
 //Fechas de nacimiento < 1980/02/01
+document.querySelector("#fecha").addEventListener('click', (evt) => {
+    evt.preventDefault();
+    
+    let fechaLimite = new Date('1980-02-01');
+    
+    let res = arr_original.filter(item => {
+        if (item.personaje && item.personaje.birth_date) {
+            let fechaNacimiento = new Date(item.personaje.birth_date);
+            return fechaNacimiento < fechaLimite;
+        }
+        return false;
+    });
+    
+    console.log("Personajes nacidos antes de 1980/02/01:", res);
+    imprimir(res);
+});
 
 //Buscador de frases
+document.querySelector(".search input").addEventListener('input', (evt) => {
+    let busqueda = evt.target.value.toLowerCase().trim();
+    
+    if (busqueda === '') {
+        imprimir(arr_original);
+        return;
+    }
+    
+    let res = arr_original.filter(item => {
+        if (item.personaje && Array.isArray(item.personaje.phrases) && item.personaje.phrases.length > 0) {
+            let encontrado = item.personaje.phrases.some(frase => 
+                frase.toLowerCase().includes(busqueda)
+            );
+            if (encontrado) {
+                console.log(`Encontrado en ${item.personaje.name}:`, item.personaje.phrases);
+            }
+            return encontrado;
+        }
+        return false;
+    });
+    
+    console.log(`Buscando frase: "${busqueda}", Personajes encontrados:`, res.length);
+    
+    if (res.length === 0) {
+        ul.innerHTML = '<li style="grid-column: 1/-1; text-align: center; padding: 40px;"><h2>No se encontraron personajes con esa frase</h2><p>Espera unos segundos si acabas de cargar la página</p></li>';
+    } else {
+        imprimir(res);
+    }
+});
